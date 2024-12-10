@@ -1,3 +1,6 @@
+using Books.API.DbContexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookAPI
 {
     public class Program
@@ -11,6 +14,12 @@ namespace BookAPI
             builder.Services.AddControllers();
 
             var app = builder.Build();
+
+            // register the DbContext on the container 
+            builder.Services.AddDbContext<BooksContext>(options =>
+                options.UseSqlite(
+                    builder.Configuration["ConnectionStrings:BooksDBConnectionString"]));
+
 
             // Configure the HTTP request pipeline.
 
