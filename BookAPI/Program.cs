@@ -1,4 +1,5 @@
 using Books.API.DbContexts;
+using Books.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookAPI
@@ -19,6 +20,10 @@ namespace BookAPI
             builder.Services.AddDbContext<BooksContext>(options =>
                 options.UseSqlite(
                     builder.Configuration["ConnectionStrings:BooksDBConnectionString"]));
+
+            builder.Services.AddScoped<IBooksRepository, BooksRepository>();
+
+            //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
             // Configure the HTTP request pipeline.
